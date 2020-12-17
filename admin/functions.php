@@ -1,4 +1,15 @@
 <?php
+
+// function to check if our query is working
+function confirmQuery($result)
+{
+    global $con;
+
+    if (!$result) {
+        die("QUERY FAILED" . mysqli_error($con));
+    }
+}
+
 function insert_categories()
 {
     global $con;
