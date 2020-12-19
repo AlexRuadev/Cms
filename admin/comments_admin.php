@@ -33,7 +33,7 @@
                             break;
 
                         default:
-                            include "includes/view_all_post_admin.php";
+                            include "includes/view_all_comments_admin.php";
                             break;
                     }
 

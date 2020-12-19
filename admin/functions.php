@@ -66,3 +66,44 @@ function deleteCategory()
         header("Location: categories_admin.php");
     }
 }
+
+//////////////////////////////////// COMMENTS //////////////////////////////////////
+
+function deleteComment()
+{
+    global $con;
+    if (isset($_GET['delete'])) {
+        $get_comment_id = $_GET['delete'];
+
+        $query = "DELETE FROM comments WHERE comment_id = {$get_comment_id} ";
+        $delete_query = mysqli_query($con, $query);
+
+        header("Location: comments_admin.php");
+    }
+}
+
+function approveComment()
+{
+    global $con;
+    if (isset($_GET['approve'])) {
+        $get_comment_id = $_GET['approve'];
+
+        $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $get_comment_id ";
+        $approve_comment_query = mysqli_query($con, $query);
+
+        header("Location: comments_admin.php");
+    }
+}
+
+function unapproveComment()
+{
+    global $con;
+    if (isset($_GET['unapprove'])) {
+        $get_comment_id = $_GET['unapprove'];
+
+        $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $get_comment_id ";
+        $unapprove_comment_query = mysqli_query($con, $query);
+
+        header("Location: comments_admin.php");
+    }
+}
