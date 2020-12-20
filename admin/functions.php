@@ -107,3 +107,46 @@ function unapproveComment()
         header("Location: comments_admin.php");
     }
 }
+
+
+//////////////////////////////////// USERS //////////////////////////////////////
+
+function deleteUser()
+{
+    global $con;
+    if (isset($_GET['delete'])) {
+        $get_user_id = $_GET['delete'];
+
+        $query = "DELETE FROM users WHERE user_id = {$get_user_id} ";
+        $delete_user_query = mysqli_query($con, $query);
+
+        header("Location: users.php");
+    }
+}
+
+
+function changeToAdmin()
+{
+    global $con;
+    if (isset($_GET['change_to_admin'])) {
+        $get_user_id = $_GET['change_to_admin'];
+
+        $query = "UPDATE users SET user_role = 'admin' WHERE user_id = $get_user_id ";
+        $change_to_admin_query = mysqli_query($con, $query);
+
+        header("Location: users.php");
+    }
+}
+
+function changeToSubscriber()
+{
+    global $con;
+    if (isset($_GET['change_to_subscriber'])) {
+        $get_user_id = $_GET['change_to_subscriber'];
+
+        $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = $get_user_id ";
+        $change_to_subscriber_query = mysqli_query($con, $query);
+
+        header("Location: users.php");
+    }
+}
