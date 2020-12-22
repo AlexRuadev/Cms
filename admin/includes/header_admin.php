@@ -1,9 +1,16 @@
 <?php include "../includes/db.php" ?>
 <?php include "functions.php" ?>
-
 <!-- Output request is used to redirect users etc -->
 <?php ob_start(); ?>
 
+<?php session_start(); ?>
+<?php
+
+if (!isset($_SESSION['user_role'])) {
+    header("Location: ../index.php");
+}
+
+?>
 
 
 <!DOCTYPE html>
