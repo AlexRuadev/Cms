@@ -39,17 +39,12 @@
 
                     ?>
 
-
                 </div>
             </div>
             <!-- /.row -->
-
         </div>
         <!-- /.container-fluid -->
-
     </div>
     <!-- /#page-wrapper -->
-
-
 
     <?php include "includes/footer_admin.php" ?>
