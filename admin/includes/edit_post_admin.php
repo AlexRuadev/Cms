@@ -34,11 +34,11 @@ if (isset($_POST['edit_post'])) {
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
     // make sure our post_image isn't empty
-    if(empty($post_image)) {
+    if (empty($post_image)) {
         $query = "SELECT * FROM posts WHERE post_id = $get_post_id ";
         $select_image = mysqli_query($con, $query);
 
-        while($row = mysqli_fetch_assoc($select_image)) {
+        while ($row = mysqli_fetch_assoc($select_image)) {
             $post_image = $row['post_image'];
         }
     }
@@ -56,8 +56,9 @@ if (isset($_POST['edit_post'])) {
 
     $update_post = mysqli_query($con, $query);
 
-    header("Location: posts.php");
+    echo "<p class='bg-success text-center'>Post Updated. <a href='../post.php?p_id={$get_post_id}'>View Posts</a> or <a href='posts.php'>Edit More Posts</a></p>";
 
+    // header("Location: posts.php");
 }
 
 
@@ -80,7 +81,6 @@ if (isset($_POST['edit_post'])) {
 
             // confirmQuery($select_categories);
 
-
             while ($row = mysqli_fetch_assoc($select_categories)) {
                 $cat_id = $row['cat_id'];
                 $cat_title = $row['cat_title'];
@@ -98,8 +98,18 @@ if (isset($_POST['edit_post'])) {
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input value="<?php echo $post_status; ?>" type="text" class="form-control" name="post_status">
+        <select class="" name="post_status" id="">
+            <option value='<?php echo $post_status ?>'><?php echo $post_status ?></option>
+            <?php
+
+            if ($post_status == 'published') {
+                echo "<option value='draft'>Draft</option>";
+            } else {
+                echo "<option value='published'>Publish</option>";
+            }
+            ?>
+
+        </select>
     </div>
 
     <div class="form-group">
@@ -114,7 +124,7 @@ if (isset($_POST['edit_post'])) {
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea type="text" class="form-control" name="post_content" id="" cols="30" rows="10"><?php echo $post_content; ?></textarea>
+        <textarea type="text" class="form-control" name="post_content" id="body" cols="30" rows="10"><?php echo $post_content; ?></textarea>
     </div>
 
     <div class="form-group">

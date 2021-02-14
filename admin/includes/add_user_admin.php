@@ -1,6 +1,7 @@
 <?php
 
 if (isset($_POST['create_user'])) {
+    
     $user_firstname = $_POST['user_firstname'];
     $user_lastname = $_POST['user_lastname'];
     $user_role = $_POST['user_role'];
@@ -15,11 +16,12 @@ if (isset($_POST['create_user'])) {
 
     // move_uploaded_file($post_image_temp, "../images/$post_image");
 
-    $query = "INSERT INTO users(user_id, user_firstname, user_lastname, user_role, username, user_email, user_password) ";
-    $query .= "VALUES('{$user_id}','{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}','{$user_password}' ) ";
+    $query = "INSERT INTO users (user_firstname, user_lastname, user_role, username, user_email, user_password) ";
+    $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}','{$user_password}' ) ";
     $create_user_query = mysqli_query($con, $query);
 
-    header("Location: users.php");
+    echo "<p class='bg-success text-center'>User $username created: " . " " . "<a href='users.php'>View Users</a></p>";
+
 }
 
 ?>
