@@ -27,6 +27,9 @@ if (isset($_POST['login'])) {
       $db_user_role = $row['user_role'];
    }
 
+   // reverse password encryption for connexion
+   $password = crypt($password, $db_user_password);
+
    if ($username === $db_username && $password === $db_user_password && $db_user_role === 'admin') {
 
       $_SESSION['username'] = $db_username;

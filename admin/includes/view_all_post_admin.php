@@ -9,8 +9,23 @@ if (isset($_POST['checkBoxArray'])) {
                 $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValue_id} ";
 
                 $update_to_published_status = mysqli_query($con, $query);
-
                 confirmQuery($update_to_published_status);
+
+                break;
+
+            case 'draft':
+                $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValue_id} ";
+
+                $update_to_draft_status = mysqli_query($con, $query);
+                confirmQuery($update_to_draft_status);
+
+                break;
+
+            case 'delete':
+                $query = "DELETE FROM posts WHERE post_id = {$postValue_id} ";
+
+                $update_to_delete_status = mysqli_query($con, $query);
+                confirmQuery($update_to_delete_status);
 
                 break;
         }
@@ -33,7 +48,8 @@ if (isset($_POST['checkBoxArray'])) {
 
         <div class="col-xs-4">
             <input type="submit" name="submit" class="btn btn-success" value="Apply">
-            <a href="add_post_admin.php" class="btn btn-primary">Add New</a>
+            <a href="posts.php?source=add_post" class="btn btn-primary">Add New</a>
+
         </div>
         <thead>
             <tr>
@@ -47,10 +63,12 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>Tags</th>
                 <th>Comments</th>
                 <th>Date</th>
+                <th>View Post</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
+
         <tbody>
             <?php
 
@@ -94,8 +112,10 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td>{$post_tags}</td>";
                 echo "<td>{$post_comment_count}</td>";
                 echo "<td>{$post_date}</td>";
+                echo "<td><a href='../post.php?p_id={$post_id}'>View</a></td>";
+
                 echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
-                echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
+                echo "<td><a onClick=\" javascript: return confirm('Are you sure you want to DELETE ?') \" href='posts.php?delete={$post_id}'>Delete</a></td>";
 
                 echo "</tr>";
             }

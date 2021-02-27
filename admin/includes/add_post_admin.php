@@ -19,7 +19,13 @@ if (isset($_POST['create_post'])) {
     $query .= "VALUES('{$post_category_id}','{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}' ) ";
     $create_post_query = mysqli_query($con, $query);
 
-    header("Location: posts.php");
+    // this function pulls out the last created ID in this table
+    $get_post_id =  mysqli_insert_id($con);
+
+    echo "<p class='bg-success text-center'>Post Created. <a href='../post.php?p_id={$get_post_id}'>View Posts</a> or <a href='posts.php'>Edit More Posts</a></p>";
+
+
+    // header("Location: posts.php");
 
     // confirmQuery($create_post_query);
 }
@@ -62,9 +68,13 @@ if (isset($_POST['create_post'])) {
         <input type="text" class="form-control" name="author">
     </div>
 
+
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
+        <select name="post_status" id="">
+            <option value="draft">Post Status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+        </select>
     </div>
 
     <div class="form-group">
